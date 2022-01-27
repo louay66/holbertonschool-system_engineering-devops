@@ -1,0 +1,15 @@
+#!/bin/bash
+echo 'Please enter an absolute pathway'
+
+read PATH
+
+if ($PATH == -d)
+
+then
+echo  ls -l $PATH
+
+else
+
+echo "This is not a directory"
+
+fi

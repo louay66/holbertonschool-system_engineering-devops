@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Display content of current directory, displays name after '-'
+list=$(ls)
+for file in $list
+do
+    echo "$file" | cut -d '-' -f2-
+done

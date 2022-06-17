@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#This script displays infinty loop with sleep PID without stop forever
+while true
+do 
+    echo "To infinity and beyond"
+    sleep 2
+    trap 'echo "I am invincible!!!"' SIGTERM
+done

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# config ngnix
+
+thefirst="
+location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }"
+config="
+location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+location /redirect_me {
+       return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ;
+}
+"
+sudo apt-get update
+sudo apt-get install nginx -y
+sudo chmod 666 /var/www/html/index.nginx-debian.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sed -i s/"${thefirst}"/"${config}}"/g /etc/nginx/sites-enabled/default
+sudo chmod 644 /var/www/html/index.nginx-debian.html
+sudo service nginx start

@@ -33,9 +33,10 @@ server {
 "
 sudo apt-get update
 sudo apt-get install nginx -y
-sudo chmod 666 /var/www/html/index.nginx-debian.html /etc/nginx/sites-enabled/default
+sudo chmod 666 /var/www/html/index.nginx-debian.html /etc/nginx/sites-enabled/default /var/www/html/error_404.html
+sudo chmod 644 /var/www/html/index.nginx-debian.html /etc/nginx/sites-e
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 echo -e "$config"> /etc/nginx/sites-enabled/default
-sudo touch /var/www/html/error_404.html && echo "Ceci n'est pas une page" 
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
 sudo chmod 644 /var/www/html/index.nginx-debian.html /etc/nginx/sites-enabled/default
 sudo service nginx restart

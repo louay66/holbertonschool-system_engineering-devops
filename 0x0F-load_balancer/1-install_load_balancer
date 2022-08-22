@@ -12,8 +12,8 @@ backend Web_Servers
     server 3781-web-02  54.82.4.59:80 check
 "
 sudo apt-get update -y
-sudo apt-get install --no-install-recommends software-properties-common
-sudo add-apt-repository ppa:vbernat/haproxy-2.6
+sudo apt-get install --no-install-recommends software-properties-common -y
+sudo add-apt-repository ppa:vbernat/haproxy-2.6 -y
 sudo apt-get install haproxy=2.6.\*
 sudo chmod 666 /etc/haproxy/haproxy.cfg
 sudo echo -e "$config" >> /etc/haproxy/haproxy.cfg

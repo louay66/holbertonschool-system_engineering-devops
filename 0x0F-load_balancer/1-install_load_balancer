@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# add load balance
+config="
+frontend Local_Server
+    bind :80
+    mode http
+    default_backend Web_Servers
+backend Web_Servers
+    mode http
+    balance roundrobin
+    server 3781-web-01  54.236.105.175:80 check
+    server 3781-web-02  54.82.4.59:80 check
+"
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.6
+sudo apt-get install haproxy=2.6.\*
+sudo chmod 666 /etc/haproxy/haproxy.cfg
+sudo echo -e "$config" >> /etc/haproxy/haproxy.cfg
+sudo service haproxy restart

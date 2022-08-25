@@ -4,7 +4,8 @@
 function digdom(){
 dig "$2.$1" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", subdom, $4, $5}' subdom="$sub"
 }
-for sub in "www" "lb-01" "web-01" "web-02"
+declare -a list=("www" "lb-01" "web-01" "web-02")
+for sub in "${list[@]}"
 do
 if [ "$2" == "$sub" ] || [ -z "$2" ]
 then digdom "$1" "$sub"

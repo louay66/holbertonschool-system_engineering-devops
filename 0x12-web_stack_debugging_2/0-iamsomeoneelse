@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# execut comand whoami under the user passed as a first argment
 sudo -u "$1" whoami

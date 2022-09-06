@@ -4,4 +4,4 @@ pkill apache2
 sudo sed -i "s/80/8080/g" /etc/nginx/sites-enabled/default
 chmod 0644 /etc/nginx/nginx.conf
 chown nginx:nginx /etc/nginx/nginx.conf
-sudo su nginx -s /bin/bash -c 'service nginx start'
+sudo -u nginx service nginx start

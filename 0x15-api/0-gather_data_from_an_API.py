@@ -6,7 +6,7 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    
+
     user_id = int(argv[1])
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{user_id}")
@@ -21,7 +21,8 @@ if __name__ == "__main__":
             if tk.get('completed'):
                 completed += 1
     print(
-        f"Employee {name_user} is done with tasks({completed}/{avrge_todos}):")
+        "Employee {} is done with tasks({}/{}):"
+        .format(name_user, completed, avrge_todos))
 
     for titel in todo.json():
         if titel.get("userId") == int(user_id) and titel.get('completed'):

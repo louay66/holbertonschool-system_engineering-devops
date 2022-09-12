@@ -14,10 +14,10 @@ if __name__ == "__main__":
     todo = requests.get("https://jsonplaceholder.typicode.com/todos")
 
     filename = str(user_id) + '.csv'
-    with open (filename, mode='w') as a:
+    with open(filename, mode='w') as a:
         write = csv.writer(a, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_ALL, lineterminator='\n')
+                           quoting=csv.QUOTE_ALL, lineterminator='\n')
         for line in todo.json():
             if line.get('userId') == int(user_id):
                 write.writerow([user_id, name_user, str(line.get('completed')),
-                                 line.get('title')])
+                                line.get('title')])

@@ -10,7 +10,7 @@ if __name__ == "__main__":
     user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                         .format(user_id))
     name_user = user.json().get('name')
-    todo = requests.get('https://jsonplaceholder.typicode.com/todos')
+    todo = requests.get("https://jsonplaceholder.typicode.com/todos")
     avrge_todos = 0
     completed = 0
 
@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     for titel in todo.json():
         if titel.get("userId") == int(user_id) and titel.get('completed'):
-            print("\t{}".format(titel.get('title')))
+            print("\t {}".format(titel.get('title')))

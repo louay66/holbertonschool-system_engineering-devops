@@ -1,34 +1,23 @@
 #!/usr/bin/python3
 """export data in json format"""
 
-from json import dumps
+import json
 import requests
 from sys import argv
 
 if __name__ == "__main__":
-    try:
-        int(argv[1])
-    except Exception as e:
-        exit(1)
+    todos = requests.get('https://jsonplaceholder.typicode.com/users/{}/todos'
+                         .format(argv[1])).json()
 
-    employeeID = int(argv[1])
-    endpoint = "https://jsonplaceholder.typicode.com"
-    user = requests.get("{}/users/{}".format(endpoint, employeeID)).json()
-    todo = requests.get(
-        "{}/users/{}/todos".format(endpoint, employeeID)).json()
-    employeeName = user.get('username')
+    user = requests.get('https://jsonplaceholder.typicode.com/users/{}'
+                        .format(argv[1])).json()
 
-    row = []
+    user_dict = {str(user.get('id')): []}
+    for todo in todos:
+        td = {"task": todo.get('title'),
+              "completed": todo.get('completed'),
+              "username": user.get('username')}
+        user_dict[str(user.get('id'))].append(td)
 
-    for elem in todo:
-        dict = {
-            "task": elem.get('title'),
-            "completed": elem.get('completed'),
-            "username": employeeName
-        }
-        row.append(dict)
-
-    employeeDict = {employeeID: row}
-
-    with open('{}.json'.format(employeeID), 'w', encoding="utf-8") as file:
-        file.write(dumps(employeeDict))
+    with open(str(user.get('id'))+".json", 'w') as f:
+        json.dump(user_dict, f)

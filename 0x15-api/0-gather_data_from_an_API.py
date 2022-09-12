@@ -7,7 +7,7 @@ from sys import argv
 
 if __name__ == "__main__":
     
-    user_id = argv[1]
+    user_id = int(argv[1])
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{user_id}")
     name_user = user.json().get('name')

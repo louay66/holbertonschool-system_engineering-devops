@@ -1,19 +1,26 @@
 #!/usr/bin/python3
 """exprt data in csv format"""
-from requests import get
-from sys import argv
-from csv import writer
 import csv
+import requests
+from sys import argv
 
 if __name__ == "__main__":
-    id = argv[1]
-    url = "https://jsonplaceholder.typicode.com"
-    user = get("{}/users/{}".format(url, id)).json()
-    target = get("{}/users/{}/todos".format(url, id)).json()
-    u_name = user.get('username')
-    file_format = '{}.csv'.format(id)
-    with open(file_format, 'w') as result:
-        for data in target:
-            data = [data['userId'], u_name, data['completed'], data['title']]
-            fmt = writer(result, quoting=csv.QUOTE_ALL)
-            fmt.writerow(data)
+    try:
+        int(argv[1])
+    except Exception as e:
+        exit(1)
+
+    employeeID = int(argv[1])
+    endpoint = "https://jsonplaceholder.typicode.com"
+    user = requests.get("{}/users/{}".format(endpoint, employeeID)).json()
+    todo = requests.get(
+        "{}/users/{}/todos".format(endpoint, employeeID)).json()
+    employeeName = user.get('username')
+
+    with open('{}.csv'.format(employeeID), 'w', encoding="utf-8") as file:
+        writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
+        for elem in todo:
+            row = [employeeID, employeeName, elem.get(
+                'completed'), elem.get('title')]
+            writer.writerow(row)
+

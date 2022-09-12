@@ -21,6 +21,7 @@ if __name__ == "__main__":
     with open(file, 'w') as a:
 
         for line in todo:
-            line = [line['userId'], user_name, line['completed'], line['title']]
+            line = [line['userId'], user_name,
+                    line['completed'], line['title']]
             write = csv.writer(a, quoting=csv.QUOTE_ALL)
             write.writerow(line)

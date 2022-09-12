@@ -1,27 +1,19 @@
 #!/usr/bin/python3
 """exprt data in csv format"""
-import csv
 from requests import get
 from sys import argv
-
+from csv import writer
+import csv
 
 if __name__ == "__main__":
-    user_id = argv[1]
-
+    id = argv[1]
     url = "https://jsonplaceholder.typicode.com"
-
-    user = get("{}/users/{}".format(url, user_id)).json()
-
-    todo = get("{}/users/{}/todos".format(url, user_id)).json()
-
-    user_name = user.get('username')
-
-    file = '{}.csv'.format(user_id)
-
-    with open(file, 'w') as a:
-
-        for line in todo:
-            line = [line['userId'], user_name,
-                    line['completed'], line['title']]
-            write = csv.writer(a, quoting=csv.QUOTE_ALL)
-            write.writerow(line)
+    user = get("{}/users/{}".format(url, id)).json()
+    target = get("{}/users/{}/todos".format(url, id)).json()
+    u_name = user.get('username')
+    file_format = '{}.csv'.format(id)
+    with open(file_format, 'w') as result:
+        for data in target:
+            data = [data['userId'], u_name, data['completed'], data['title']]
+            fmt = writer(result, quoting=csv.QUOTE_ALL)
+            fmt.writerow(data)

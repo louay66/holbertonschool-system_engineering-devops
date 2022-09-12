@@ -6,7 +6,11 @@ from sys import argv
 
 
 if __name__ == "__main__":
-
+    try:
+        int(argv[1])
+    except Exception as f:
+        exit(1)
+    
     user_id = argv[1]
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{user_id}")

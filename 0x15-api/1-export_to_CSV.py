@@ -16,12 +16,11 @@ if __name__ == "__main__":
 
     user_name = user.get('username')
 
-    file = '{}.json'.format(user_id)
-    forma = {}
-    forma[id] = []
-    for value in todo:
-        append = {'task': value['title'], 'completed': value['completed'],
-                   'username': user_name}
-        forma[id].append(append)
+    file = '{}.csv'.format(user_id)
     with open(file, 'w') as a:
-        dump(fmt, a)
+
+        for line in todo:
+            line = [line['userId'], user_name,
+                    line['completed'], line['title']]
+            write = csv.writer(a, quoting=csv.QUOTE_ALL)
+            write.writerow(line)

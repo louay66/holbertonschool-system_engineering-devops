@@ -1,24 +1,34 @@
 #!/usr/bin/python3
 """export data in json format"""
 
-from json import dump
-from requests import get
+from json import dumps
+import requests
 from sys import argv
 
-
 if __name__ == "__main__":
-    user_id = argv[1]
-    url = "https://jsonplaceholder.typicode.com"
-    user = get("{}/users/{}".format(url, user_id)).json()
-    todo = get('{}/todos?userId={}'.format(url, user_id)).json()
-    u_name = user.get('username')
-    format = {}
-    format[user_id] = []
-    file = '{}.json'.format(user_id)
-    for value in todo:
-        append = {'task': value['title'], 'completed': value['completed'],
-                  'username': u_name}
-        format[user_id].append(append)
+    try:
+        int(argv[1])
+    except Exception as e:
+        exit(1)
 
-    with open(file, 'w') as a:
-        dump(format, a)
+    employeeID = int(argv[1])
+    endpoint = "https://jsonplaceholder.typicode.com"
+    user = requests.get("{}/users/{}".format(endpoint, employeeID)).json()
+    todo = requests.get(
+        "{}/users/{}/todos".format(endpoint, employeeID)).json()
+    employeeName = user.get('username')
+
+    row = []
+
+    for elem in todo:
+        dict = {
+            "task": elem.get('title'),
+            "completed": elem.get('completed'),
+            "username": employeeName
+        }
+        row.append(dict)
+
+    employeeDict = {employeeID: row}
+
+    with open('{}.json'.format(employeeID), 'w', encoding="utf-8") as file:
+        file.write(dumps(employeeDict))

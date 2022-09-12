@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ fetch api"""
-
 import requests
 from sys import argv
 

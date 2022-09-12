@@ -21,9 +21,9 @@ if __name__ == "__main__":
             if tk.get('completed'):
                 completed += 1
     print(
-        f"Employee {name_user} is done with tasks({completed}/{avrge_todos})")
+        f"Employee {name_user} is done with tasks({completed}/{avrge_todos}):")
 
     for titel in todo.json():
         if titel.get("userId") == int(user_id):
             if titel.get('completed'):
-                print(titel.get('title'))
+                print("\t{}".format(titel.get('title')))

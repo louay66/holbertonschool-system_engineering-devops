@@ -24,6 +24,5 @@ if __name__ == "__main__":
         f"Employee {name_user} is done with tasks({completed}/{avrge_todos}):")
 
     for titel in todo.json():
-        if titel.get("userId") == int(user_id):
-            if titel.get('completed'):
-                print("\t{}".format(titel.get('title')))
+        if titel.get("userId") == int(user_id) and titel.get('completed'):
+            print("\t{}".format(titel.get('title')))

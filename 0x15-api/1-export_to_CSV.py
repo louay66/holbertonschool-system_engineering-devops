@@ -1,26 +1,26 @@
 #!/usr/bin/python3
 """exprt data in csv format"""
 import csv
-import requests
+from requests import get
 from sys import argv
 
+
 if __name__ == "__main__":
-    try:
-        int(argv[1])
-    except Exception as e:
-        exit(1)
+    user_id = argv[1]
 
-    employeeID = int(argv[1])
-    endpoint = "https://jsonplaceholder.typicode.com"
-    user = requests.get("{}/users/{}".format(endpoint, employeeID)).json()
-    todo = requests.get(
-        "{}/users/{}/todos".format(endpoint, employeeID)).json()
-    employeeName = user.get('username')
+    url = "https://jsonplaceholder.typicode.com"
 
-    with open('{}.csv'.format(employeeID), 'w', encoding="utf-8") as file:
-        writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
-        for elem in todo:
-            row = [employeeID, employeeName, elem.get(
-                'completed'), elem.get('title')]
-            writer.writerow(row)
+    user = get("{}/users/{}".format(url, user_id)).json()
 
+    todo = get("{}/users/{}/todos".format(url, user_id)).json()
+
+    user_name = user.get('username')
+
+    file = '{}.csv'.format(user_id)
+
+    with open(file, 'w') as a:
+
+        for line in todo:
+            line = [line['userId'], user_name, line['completed'], line['title']]
+            write = csv.writer(a, quoting=csv.QUOTE_ALL)
+            write.writerow(line)

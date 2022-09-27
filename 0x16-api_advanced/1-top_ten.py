@@ -19,4 +19,3 @@ def top_ten(subreddit):
         data_dict = data.json()
         for child in data_dict.get("data").get("children"):
             print(child.get("data").get("title"))
-

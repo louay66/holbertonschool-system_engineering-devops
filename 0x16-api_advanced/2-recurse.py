@@ -6,10 +6,9 @@ import requests
 def recurse(subreddit, hot_list=[], after=''):
     """
 
-    :param subreddit:
-    :param hot_list:
-    :param after:
-    :return:
+    :param subreddit: subreddit
+    :param hot_list: hot_list
+    :param after: after
     """
 
     data = requests.get("https://www.reddit.com/r/{}/hot.json?limit=10"

@@ -11,8 +11,8 @@ def recurse(subreddit, hot_list=[], after=''):
     :param after: after
     """
 
-    data = requests.get("https://www.reddit.com/r/{}/hot.json?limit=10"
-                        "/hot?after={}"
+    data = requests.get("https://www.reddit.com/r/"
+                        "{}/hot.json?limit=100&after={}"
                         .format(subreddit, after),
                         headers={"User-Agent": "My-User-Agent"},
                         allow_redirects=False)
